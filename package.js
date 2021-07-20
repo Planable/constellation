@@ -1,14 +1,14 @@
 Package.describe({
-  name:    'constellation:console',
-  summary: 'An extensible development console for Meteor',
-  version: '1.4.7',
-  git:     'https://github.com/JackAdams/constellation.git',
-  documentation: 'README.md',
-  debugOnly: true
+  name: "planable:console",
+  summary: "An extensible development console for Meteor",
+  version: "1.4.11",
+  git: "https://github.com/Planable/constellation.git",
+  documentation: "README.md",
+  debugOnly: true,
 });
 
-Package.onUse(function(api) {
-
+Package.onUse(function (api) {
+  api.use("planable:editable-json@0.6.6");
   var clientFiles = [
     "client/lib/utils.js",
     "client/lib/api.js",
@@ -39,37 +39,44 @@ Package.onUse(function(api) {
     "client/row_actions/actions.js",
     "client/Constellation.css",
     "client/Constellation.html",
-    "client/Constellation.js"
+    "client/Constellation.js",
   ];
 
-  var serverFiles = [
-    "server/methods.js",
-    "server/publications.js"
-  ];
-  
+  var serverFiles = ["server/methods.js", "server/publications.js"];
+
   var commonFiles = [
     "common/common.js",
     "common/utility_functions.js",
     "common/mutators.js",
-    "common/methods.js"
+    "common/methods.js",
   ];
 
-  api.versionsFrom('1.0');
-  api.use(['templating', 'tracker', 'mongo', 'session', 'reactive-var', 'reactive-dict', 'blaze', 'jquery'], 'client');
-  api.use(['check', 'random', 'underscore']);
+  api.versionsFrom("2.3");
+  api.use(
+    [
+      "templating@1.4.1",
+      "tracker",
+      "mongo",
+      "session",
+      "reactive-var",
+      "reactive-dict",
+      "blaze@2.5.0",
+      "jquery@1.0.1",
+    ],
+    "client"
+  );
+  api.use(["check", "random", "underscore"]);
   // api.use('aldeed:collection2@3.0.0', {weak: true}); // This must go before: api.use('dburles:mongo-collection-instances@0.3.4');
-  api.use('dburles:mongo-collection-instances@0.3.5');
-  api.use('gwendall:session-json@0.1.7', 'client');
-  api.use('babrahams:editable-json@0.6.5');
-  api.use('accounts-base', {weak: true});
+  api.use("planable:mongo-collection-instances@0.3.6");
+  api.use("gwendall:session-json@0.1.7", "client");
+  api.use("accounts-base", { weak: true });
 
-  api.add_files(commonFiles);
-  api.add_files(clientFiles, "client");
-  api.add_files(serverFiles, "server");
-  
+  api.addFiles(commonFiles);
+  api.addFiles(clientFiles, "client");
+  api.addFiles(serverFiles, "server");
+
   if (api.export) {
-    api.export('API', 'client');
-    api.export('Constellation');
+    api.export("API", "client");
+    api.export("Constellation");
   }
-
 });

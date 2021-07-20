@@ -23,7 +23,7 @@ Template.Constellation_undoRedo.events({
   }
 });
 
-EditableJSON = Package['babrahams:editable-json'].EditableJSON;
+EditableJSON = Package["planable:editable-json"].EditableJSON;
 
 if (!!EditableJSON) {
   EditableJSON.afterUpdate(function(collection, action, documentBefore, result) {
